@@ -1,7 +1,18 @@
 const express = require("express")
 const bodyParser = require("body-parser")
+const mongoose = require("mongoose")
 
 const app = express()
+
+mongoose.connect("mongodb+srv://dbreprograma:Amor@3105@cluster0.whrmq.mongodb.net/cursos?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true
+})
+
+
+let db = mongoose.connection;
+db.on("error", console.log.bind(console, "connnection error:"))
+db.once("open", function() {
+  console.log("conexão feita com sucesso.")
+})
 
 //rotas
 const cursos = require("./routes/cursosRoute")
